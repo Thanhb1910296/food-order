@@ -1,33 +1,32 @@
-import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:food_order/constants/global_variables.dart';
-import 'package:food_order/features/account/screens/account_screen.dart';
-import 'package:food_order/features/cart/screens/cart_screen.dart';
-import 'package:food_order/features/home/screens/home_screen.dart';
-import 'package:food_order/providers/user_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:food_order/features/merchant/screens/order_screen.dart';
+import 'package:food_order/features/merchant/screens/post_screen.dart';
+import 'package:food_order/features/order_detail/screens/order_detail_screen.dart';
 
-class BottomBar extends StatefulWidget {
-  static const String routeName = '/actual-home';
-  const BottomBar({Key? key}) : super(key: key);
+class MerchantScreen extends StatefulWidget {
+  const MerchantScreen({Key? key}) : super(key: key);
 
   @override
-  State<BottomBar> createState() => _BottomBarState();
+  State<MerchantScreen> createState() => _MerchantScreenState();
 }
 
-class _BottomBarState extends State<BottomBar> {
+class _MerchantScreenState extends State<MerchantScreen> {
   int _page = 0;
   double bottomBarWidth = 42;
   double bottomBarBorderWidth = 5;
 
   List<Widget> pages = [
-    const HomeScreen(),
-    const AccountScreen(),
-    const CartScreen(),
-    const Text('data'),
+     const PostScreen(),
+    // const AnalyticsScreen(),
+    // const OrdersScreen(),
+
+    const OrdersScreen(),
+    Text('3')
+
   ];
 
-  void updatePage(int page){
+  void updatePage(int page) {
     setState(() {
       _page = page;
     });
@@ -35,18 +34,47 @@ class _BottomBarState extends State<BottomBar> {
 
   @override
   Widget build(BuildContext context) {
-    final userCartLen = context.watch<UserProvider>().user.cart.length;
-    
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(50),
+        child: AppBar(
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+              gradient: GlobalVariables.appBarGradient,
+            ),
+          ),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                alignment: Alignment.topLeft,
+                child: Image(
+                  image: AssetImage('assets/images/logo.jpg'), 
+                  width: 60,
+                ),
+              ),
+
+              const Text(
+                'merchant',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
       body: pages[_page],
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _page, 
+        currentIndex: _page,
         selectedItemColor: GlobalVariables.selectedNavBarColor,
         unselectedItemColor: GlobalVariables.unselectedNavBarColor,
-        //backgroundColor: GlobalVariables.backgroundColor,
+        backgroundColor: Colors.white,
         iconSize: 28,
         onTap: updatePage,
         items: [
+          // POSTS
           BottomNavigationBarItem(
             icon: Container(
               width: bottomBarWidth,
@@ -66,7 +94,7 @@ class _BottomBarState extends State<BottomBar> {
             ),
             label: '',
           ),
-          // ACCOUNT
+          // ANALYTICS
           BottomNavigationBarItem(
             icon: Container(
               width: bottomBarWidth,
@@ -81,12 +109,12 @@ class _BottomBarState extends State<BottomBar> {
                 ),
               ),
               child: const Icon(
-                Icons.person_outline_outlined,
+                Icons.analytics_outlined,
               ),
             ),
             label: '',
           ),
-          //CART
+          // ORDERS
           BottomNavigationBarItem(
             icon: Container(
               width: bottomBarWidth,
@@ -100,38 +128,14 @@ class _BottomBarState extends State<BottomBar> {
                   ),
                 ),
               ),
-              child: Badge(
-                elevation: 0,
-                badgeContent: Text(userCartLen.toString()),
-                badgeColor: Colors.red,
-                child: const Icon(
-                  Icons.shopping_cart_outlined,
-                ),
-              ),
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Container(
-              width: bottomBarWidth,
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    color: _page == 4
-                        ? GlobalVariables.selectedNavBarColor
-                        : Colors.white,
-                    width: bottomBarBorderWidth,
-                  ),
-                ),
-              ),
               child: const Icon(
-                Icons.settings_outlined,
+                Icons.all_inbox_outlined,
               ),
             ),
             label: '',
           ),
-        ]
-      )
+        ],
+      ),
     );
   }
 }

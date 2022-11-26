@@ -1,0 +1,47 @@
+<section class="d-flex justify-content-center align-items-center" style='height:800px'>
+    <form action="/sign-up-for-merchant-handler" method="post"
+        class="d-flex flex-column justify-content-center p-5 border  border-1 border-warning rounded">
+        <h1>Sign up for Merchant</h1>
+
+        <% if (typeof message !='undefined' ) { %>
+            <div class="mb-3 p-2 bg-danger text-light">
+                <%= message %>
+            </div>
+            <% } %>
+
+                <% if (typeof messageSuccess !='undefined' ) { %>
+                    <div class="mb-3 p-2 bg-success  text-light">
+                        <%= messageSuccess %>
+                    </div>
+                    <% } %>
+                        <div class="mb-3">
+                            <label for="formControlName" class="form-label">Enter your name</label>
+                            <input type="text" name="name" class="form-control" id="formControlName" required
+                                placeholder="Enter your name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="formControlEmail" class="form-label">Enter your email address</label>
+                            <input type="email" name="email" class="form-control" id="formControlEmail" required
+                                placeholder="name@example.com">
+                        </div>
+                        <div class="mb-3">
+                            <label for="formControlPassword" class="form-label">Enter your password</label>
+                            <input type="password" name="password" class="form-control" id="formControlPassword" required
+                                placeholder="Enter your password">
+                        </div>
+                        <div class="mb-3">
+                            <label for="formControlRePassword" class="form-label">Enter your re password</label>
+                            <input type="password" name="re_password" class="form-control" id="formControlRePassword" required
+                                placeholder="Enter your re password">
+                        </div>
+                        <div class="mb-3">
+                            <label for="formControlAddress" class="form-label">Enter your address</label>
+                            <input type="text" name="address" class="form-control" id="formControlAddress" required
+                                placeholder="Enter your address">
+                        </div>
+                        <div class="mb-3 d-flex justify-content-end">
+                            <button type="submit" class="btn btn-outline-primary mx-2">Sign up</button>
+                        </div>
+    </form>
+
+</section>

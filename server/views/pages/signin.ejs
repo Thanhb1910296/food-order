@@ -1,0 +1,20 @@
+<section class="d-flex justify-content-center align-items-center" style='height:800px'>
+    <form action="/sign-in-handler" method="post" class="d-flex flex-column justify-content-center p-5 border  border-1 border-warning rounded">
+        <h1>Sign in</h1>
+        <% if (typeof message != 'undefined') { %>
+        <div class="mb-3 p-2 bg-danger  text-light"><%= message %></div>
+        <% } %>
+        <div class="mb-3">
+            <label for="formControlEmail" class="form-label">Enter your email address</label>
+            <input type="email" name="email" class="form-control" id="formControlEmail" placeholder="name@example.com">
+        </div>
+        <div class="mb-3">
+            <label for="formControlPassword" class="form-label">Enter your password</label>
+            <input type="password" name="password" class="form-control" id="formControlPassword" placeholder="Enter your password">
+        </div>
+        <div class="mb-3 d-flex justify-content-around">
+            <a href="/sign-up-for-merchant"><button type="button" class="btn btn-outline-warning mx-2">Sign up for Merchant</button></a> 
+            <button type="submit" class="btn btn-outline-primary mx-2">Sign in</button>
+        </div>
+    </form>
+</section>

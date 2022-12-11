@@ -1,9 +1,10 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:food_order/constants/global_variables.dart';
-import 'package:food_order/features/account/screens/account_screen.dart';
 import 'package:food_order/features/cart/screens/cart_screen.dart';
 import 'package:food_order/features/home/screens/home_screen.dart';
+import 'package:food_order/features/me/screens/me_screen.dart';
+import 'package:food_order/features/my_order/screens/my_order_screen.dart';
 import 'package:food_order/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -22,9 +23,9 @@ class _BottomBarState extends State<BottomBar> {
 
   List<Widget> pages = [
     const HomeScreen(),
-    const AccountScreen(),
     const CartScreen(),
-    const Text('data'),
+    const MyOrderScreen(),
+    const MeScreen(),
   ];
 
   void updatePage(int page){
@@ -66,26 +67,6 @@ class _BottomBarState extends State<BottomBar> {
             ),
             label: '',
           ),
-          // ACCOUNT
-          BottomNavigationBarItem(
-            icon: Container(
-              width: bottomBarWidth,
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    color: _page == 1
-                        ? GlobalVariables.selectedNavBarColor
-                        : Colors.white,
-                    width: bottomBarBorderWidth,
-                  ),
-                ),
-              ),
-              child: const Icon(
-                Icons.person_outline_outlined,
-              ),
-            ),
-            label: '',
-          ),
           //CART
           BottomNavigationBarItem(
             icon: Container(
@@ -93,7 +74,7 @@ class _BottomBarState extends State<BottomBar> {
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
-                    color: _page == 2
+                    color: _page == 1
                         ? GlobalVariables.selectedNavBarColor
                         : Colors.white,
                     width: bottomBarBorderWidth,
@@ -111,13 +92,14 @@ class _BottomBarState extends State<BottomBar> {
             ),
             label: '',
           ),
+          // My Order
           BottomNavigationBarItem(
             icon: Container(
               width: bottomBarWidth,
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
-                    color: _page == 4
+                    color: _page == 2
                         ? GlobalVariables.selectedNavBarColor
                         : Colors.white,
                     width: bottomBarBorderWidth,
@@ -125,7 +107,27 @@ class _BottomBarState extends State<BottomBar> {
                 ),
               ),
               child: const Icon(
-                Icons.settings_outlined,
+                Icons.delivery_dining,
+              ),
+            ),
+            label: '',
+          ),
+          
+          BottomNavigationBarItem(
+            icon: Container(
+              width: bottomBarWidth,
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                    color: _page == 3
+                        ? GlobalVariables.selectedNavBarColor
+                        : Colors.white,
+                    width: bottomBarBorderWidth,
+                  ),
+                ),
+              ),
+              child: const Icon(
+                Icons.person_outlined,
               ),
             ),
             label: '',

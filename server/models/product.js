@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const commentSchema = require("./comment");
 
 const productSchema = mongoose.Schema({
   name: {
@@ -32,6 +32,7 @@ const productSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  comments: [commentSchema],
 
 });
 

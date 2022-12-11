@@ -102,6 +102,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         CustomTextField(
                           controller: _passwordController,
                           hintText: 'Password',
+                          
                         ),
                         const SizedBox(height: 10),
 

@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:food_order/models/comment.dart';
+
 class Product {
   final String name;
   final String description;
@@ -8,6 +10,7 @@ class Product {
   final String category;
   final double price;
   final String? id;
+  final List<Comment>? comment;
   Product({
     required this.name,
     required this.description,
@@ -16,6 +19,7 @@ class Product {
     required this.category,
     required this.price,
     this.id,
+    this.comment
   });
 
   Map<String, dynamic> toMap() {
@@ -27,6 +31,7 @@ class Product {
       'category': category,
       'price': price,
       'id': id,
+      'comment': comment
     };
   }
 
@@ -39,6 +44,13 @@ class Product {
       category: map['category'] ?? '',
       price: map['price']?.toDouble() ?? 0.0,
       id: map['_id'],
+      comment: map['comments'] != null
+      ? List<Comment>.from(
+          map['comments']?.map(
+            (x) => Comment.fromMap(x),
+          ),
+        )
+      : null,
     );
   }
 

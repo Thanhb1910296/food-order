@@ -60,7 +60,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
         child: AppBar(
           flexibleSpace: Container(
             decoration: const BoxDecoration(
-              gradient: GlobalVariables.appBarGradient,
+              color: GlobalVariables.secondaryColor
             ),
           ),
           title: Row(
@@ -69,7 +69,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
               Expanded(
                 child: Container(
                   height: 42,
-                  margin: const EdgeInsets.only(left: 15),
+                  margin: const EdgeInsets.only(right: 14),
                   child: Material(
                     borderRadius: BorderRadius.circular(7),
                     elevation: 1,
@@ -107,7 +107,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                             width: 1,
                           ),
                         ),
-                        hintText: 'Search Amazon.in',
+                        hintText: 'Search ...',
                         hintStyle: const TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 17,
@@ -133,6 +133,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: 30,),
               const Text(
                 'View order details',
                 style: TextStyle(
@@ -155,7 +156,6 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                       DateTime.fromMillisecondsSinceEpoch(
                           widget.order.orderedAt),
                     )}'),
-                    Text('Order ID:          ${widget.order.id}'),
                     Text('Order Total:      \$${widget.order.totalPrice}'),
                   ],
                 ),
@@ -200,7 +200,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 Text(
-                                  'Qty: ${widget.order.quantity[i]}',
+                                  'Quantity: ${widget.order.quantity[i]}',
                                 ),
                               ],
                             ),

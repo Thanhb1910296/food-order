@@ -24,6 +24,17 @@ adminRouter.get("/administrator/approve/:id", checkAdmin, async (req, res) => {
     })
 });
 
+adminRouter.get("/administrator/manage/:id", checkAdmin, async (req, res) => {
+  let id = req.params.id;
+  let merchantInfo = await User.findById(id);
+  let productListOfMerchant = await Product.find({userId:id})
+  res.render('index',{
+    page: "details-of-merchant",
+    merchantInfo :merchantInfo,
+    productListOfMerchant: productListOfMerchant
+  })
+});
+
 adminRouter.get("/administrator/delete/:id", checkAdmin, async (req, res) => {
   let id = req.params.id;
   let user = await User.findById(id);

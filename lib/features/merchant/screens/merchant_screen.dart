@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:food_order/constants/global_variables.dart';
 import 'package:food_order/features/merchant/screens/order_screen.dart';
 import 'package:food_order/features/merchant/screens/post_screen.dart';
-import 'package:food_order/features/order_detail/screens/order_detail_screen.dart';
 
 class MerchantScreen extends StatefulWidget {
   const MerchantScreen({Key? key}) : super(key: key);
@@ -17,13 +16,9 @@ class _MerchantScreenState extends State<MerchantScreen> {
   double bottomBarBorderWidth = 5;
 
   List<Widget> pages = [
-     const PostScreen(),
-    // const AnalyticsScreen(),
-    // const OrdersScreen(),
-
+    const PostScreen(),
     const OrdersScreen(),
-    Text('3')
-
+    const Text(''),
   ];
 
   void updatePage(int page) {
@@ -40,7 +35,7 @@ class _MerchantScreenState extends State<MerchantScreen> {
         child: AppBar(
           flexibleSpace: Container(
             decoration: const BoxDecoration(
-              gradient: GlobalVariables.appBarGradient,
+              color: Colors.orange
             ),
           ),
           title: Row(
@@ -55,7 +50,7 @@ class _MerchantScreenState extends State<MerchantScreen> {
               ),
 
               const Text(
-                'merchant',
+                'Merchant',
                 style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,

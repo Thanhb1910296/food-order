@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_order/common/widgets/loading.dart';
 import 'package:food_order/common/widgets/single_product.dart';
 import 'package:food_order/constants/global_variables.dart';
-import 'package:food_order/features/account/services/account_service.dart';
+import 'package:food_order/features/my_order/services/my_order_service.dart';
 import 'package:food_order/features/order_detail/screens/order_detail_screen.dart';
 import 'package:food_order/models/order.dart';
 
@@ -15,7 +15,7 @@ class Orders extends StatefulWidget {
 
 class _OrdersState extends State<Orders> {
   List<Order>? orders;
-  final AccountServices accountServices = AccountServices();
+  final MyOrderServices myorderServices = MyOrderServices();
 
   @override
   void initState() {
@@ -24,7 +24,7 @@ class _OrdersState extends State<Orders> {
   }
 
   void fetchOrders() async {
-    orders = await accountServices.fetchMyOrders(context: context);
+    orders = await myorderServices.fetchMyOrders(context: context);
     setState(() {});
   }
 

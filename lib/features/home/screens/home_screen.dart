@@ -6,7 +6,7 @@ import 'package:food_order/common/widgets/action_button.dart';
 
 import 'package:food_order/common/widgets/loading.dart';
 import 'package:food_order/common/widgets/single_product.dart';
-import 'package:food_order/features/account/services/account_service.dart';
+
 
 import 'package:food_order/features/detail/screens/product_detail_screen.dart';
 
@@ -68,10 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             SizedBox(height: 30),
             AddressBox(),
-            // AccountButton(
-            //   text: 'Log Out',
-            //   onTap: () => AccountServices().logOut(context),
-            // ),
+
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
               child: SizedBox(

@@ -74,21 +74,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
         child: AppBar(
           flexibleSpace: Container(
             decoration: const BoxDecoration(
-              gradient: GlobalVariables.appBarGradient,
+              color: Colors.orange
             ),
           ),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Container(
-              //   alignment: Alignment.topLeft,
-              //   child: Image.asset(
-              //     'assets/images/logo.jpg',
-              //     width: 60,
-              //   ),
-              // ),
               const Text(
-                'merchant',
+                'Merchant',
                 style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
@@ -199,6 +192,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   text: 'Sell',
                   onTap: sellProduct,
                 ),
+                const SizedBox(height: 30),
               ]
             )
           )

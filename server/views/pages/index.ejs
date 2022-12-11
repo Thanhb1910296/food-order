@@ -14,6 +14,7 @@
                       <th scope="col">Name</th>
                       <th scope="col">Email</th>
                       <th scope="col">Address</th>
+                      <th scope="col">Details</th>
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
@@ -24,6 +25,9 @@
                             <td><%= merchant.name %></td>
                             <td><%= merchant.email %></td>
                             <td><%= merchant.address %></td>
+                            <td>
+                                <a href="/administrator/manage/<%= merchant._id  %> "><button type="button" class="btn btn-outline-primary">Details</button></a> 
+                            </td>
                             <td>
                                 <% if (merchant.type == "pre-merchant") { %>
                                     <a href="/administrator/approve/<%= merchant._id  %> "><button type="button" class="btn btn-outline-primary">Approve</button></a> 

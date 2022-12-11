@@ -11,7 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AccountServices {
+class MyOrderServices {
   Future<List<Order>> fetchMyOrders({
     required BuildContext context,
   }) async {
@@ -43,20 +43,5 @@ class AccountServices {
       showSnackBar(context, e.toString());
     }
     return orderList;
-  }
-
-  void logOut(BuildContext context) async {
-    try {
-      SharedPreferences sharedPreferences =
-          await SharedPreferences.getInstance();
-      await sharedPreferences.setString('x-auth-token', '');
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        AuthScreen.routeName,
-        (route) => false,
-      );
-    } catch (e) {
-      showSnackBar(context, e.toString());
-    }
   }
 }

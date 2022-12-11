@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'package:food_order/features/cart/services/cart_service.dart';
+
 import 'package:food_order/features/detail/services/product_detail_service.dart';
+
 import 'package:food_order/models/product.dart';
+
 import 'package:food_order/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -48,13 +52,15 @@ class _CartProductState extends State<CartProduct> {
             horizontal: 10,
           ),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Image.network(
                 product.images[0],
                 fit: BoxFit.contain,
                 height: 135,
-                width: 135,
+                width: 110,
               ),
+              // SizedBox(width: 6,),
               Column(
                 children: [
                   Container(
@@ -63,7 +69,9 @@ class _CartProductState extends State<CartProduct> {
                     child: Text(
                       product.name,
                       style: const TextStyle(
-                        fontSize: 16,
+                        fontSize: 19,
+                        fontWeight: FontWeight.bold,
+
                       ),
                       maxLines: 2,
                     ),
@@ -72,29 +80,19 @@ class _CartProductState extends State<CartProduct> {
                     width: 235,
                     padding: const EdgeInsets.only(left: 10, top: 5),
                     child: Text(
-                      '\$${product.price}',
+                      '${product.price}'+ ' đ',
                       style: const TextStyle(
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
+                        color: Colors.red,
                       ),
                       maxLines: 2,
                     ),
-                  ),
-                  Container(
-                    width: 235,
-                    padding: const EdgeInsets.only(left: 10),
-                    child: const Text('Eligible for FREE Shipping'),
                   ),
                   Container(
                     width: 235,
                     padding: const EdgeInsets.only(left: 10, top: 5),
-                    child: const Text(
-                      'In Stock',
-                      style: TextStyle(
-                        color: Colors.teal,
-                      ),
-                      maxLines: 2,
-                    ),
+                    child: const Text('Eligible for FREE Shipping'),
                   ),
                 ],
               ),
@@ -107,6 +105,7 @@ class _CartProductState extends State<CartProduct> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
+                
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: Colors.black12,

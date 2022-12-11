@@ -43,33 +43,35 @@ class ProductDetailsServices {
     }
   }
 
-  // void rateProduct({
-  //   required BuildContext context,
-  //   required Product product,
-  //   required double rating,
-  // }) async {
-  //   final userProvider = Provider.of<UserProvider>(context, listen: false);
+  void commentProduct({
+    required BuildContext context,
+    required Product product,
+    required String comment,
+  }) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
 
-  //   try {
-  //     http.Response res = await http.post(
-  //       Uri.parse('$uri/api/rate-product'),
-  //       headers: {
-  //         'Content-Type': 'application/json; charset=UTF-8',
-  //         'x-auth-token': userProvider.user.token,
-  //       },
-  //       body: jsonEncode({
-  //         'id': product.id!,
-  //         'rating': rating,
-  //       }),
-  //     );
+    try {
+      http.Response res = await http.post(
+        Uri.parse('$uri/api/comment-product'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': userProvider.user.token,
+        },
+        body: jsonEncode({
+          'id': product.id!,
+          'comment': comment,
+        }),
+      );
 
-  //     httpErrorHandle(
-  //       response: res,
-  //       context: context,
-  //       onSuccess: () {},
-  //     );
-  //   } catch (e) {
-  //     showSnackBar(context, e.toString());
-  //   }
-  // }
+      httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: () {},
+        
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
 }

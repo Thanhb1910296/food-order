@@ -1,16 +1,15 @@
-import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:food_order/common/stars.dart';
-import 'package:food_order/common/widgets/custom_button.dart';
+
 import 'package:food_order/constants/global_variables.dart';
+
 import 'package:food_order/features/detail/services/product_detail_service.dart';
 import 'package:food_order/features/search/screens/search_screen.dart';
-import 'package:food_order/models/product.dart';
-import 'package:food_order/providers/user_provider.dart';
 
+import 'package:food_order/models/product.dart';
+
+import 'package:food_order/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -26,14 +25,13 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
-  final ProductDetailsServices productDetailsServices =
-      ProductDetailsServices();
-  double avgRating = 0;
-  double myRating = 0;
-
+  final ProductDetailsServices productDetailsServices = ProductDetailsServices();
+  TextEditingController _txtController = TextEditingController();
+  int i = 0;
   @override
   void initState() {
     super.initState();
+    checknullComment();
     // double totalRating = 0;
     // for (int i = 0; i < widget.product.rating!.length; i++) {
     //   totalRating += widget.product.rating![i].rating;
@@ -57,6 +55,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       context: context,
       product: widget.product,
     );
+
+  }
+  void checknullComment(){
+    if(widget.product.comment?.length == 0){
+      i = 0; 
+    } else{
+      i = 1;
+    }
   }
 
   @override
@@ -127,7 +133,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               ),
               Container(
                 color: Colors.transparent,
-                height: 42,
+                height: 40,
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 child: const Icon(Icons.mic, color: Colors.black, size: 25),
               ),
@@ -184,7 +190,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             ),
             Container(
               color: Colors.black12,
-              height: 5,
+              height: 1,
             ),
             // Padding(
             //   padding: const EdgeInsets.all(8),
@@ -330,10 +336,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   //     color: const Color.fromRGBO(254, 216, 19, 1),
                   //   ),
                   // ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10),
             
                   Divider(height: 5, thickness: 2, color: Colors.grey.shade300,),
-                  SizedBox(height: 5,),
+                  SizedBox(height: 15),
                   
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -355,93 +361,91 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             border: Border.all(color: Colors.black)
                           ),
                           child: TextField(
-                            // controller: _txtController,
+                            controller: _txtController,
+                            
                             style: TextStyle(fontSize: 17),
                             maxLines: 6,
                             decoration: InputDecoration.collapsed(hintText: "Enter your cmt here"),
                           ),
                         ),
-                        SizedBox(height: 30,),
+                        SizedBox(height: 5,),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.red, // Background color
+                          ),
+                          onPressed: (){
+                            productDetailsServices.commentProduct(
+                              context: context,
+                              product: widget.product,
+                              comment: _txtController.text,
+                            );
+                            Navigator.pushNamed(
+                              context,
+                              ProductDetailScreen.routeName,
+                              arguments: widget.product,
+                            );
+
+                        }, child: Text('Enter', style: TextStyle(fontSize: 18),))
                       ],
                     ),
-                  )
-                  // Padding(
-                  //   padding: EdgeInsets.symmetric(vertical: 10),
-                  //   child: Text('Eating salad daily will also increase the power of antioxidants in blood . Loaded with vitamins minerals, fiber, calcium, protein .any type of salads leafy greens have a huge nutritional benefits'
-                  //     ,style: TextStyle(fontSize: 14),
-                  //     textAlign: TextAlign.justify,
-                  //   ),
-                  // ),
-                  // Padding(
-                  //   padding: EdgeInsets.symmetric(vertical: 15),
-                  //   child: Row(
-                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //     children: [
-                  //       Text(
-                  //         'Delivery Time',
-                  //         style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),
-                  //         textAlign: TextAlign.justify,
-                  //       ),
-                  //       Row(
-                  //         children: [
-                  //           Padding(
-                  //             padding: EdgeInsets.symmetric(horizontal: 5),
-                  //             child: Icon(Icons.timer_outlined, color: Colors.red),
-                  //           ),
-                  //           Text(
-                  //             '30'+' Minutes',
-                  //             style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),
-                  //             textAlign: TextAlign.justify,
-                  //           ),
-                  //         ],
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
+                  ),
+
+                  Divider(height: 5, thickness: 2, color: Colors.grey.shade300,),
+                  SizedBox(height: 15),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text('Reviews', style: TextStyle(fontSize: 18, color: Colors.grey.shade800),),
+                    ],
+                  ),
                   
-                  // Padding(       
-                  //   padding: EdgeInsets.only(top: 10),
-                  //   child: Container(
-                  //     margin: EdgeInsets.only(left: 12, top: 16),
-                  //     child: ElevatedButton(
-                  //       onPressed: (){
-                  //         showDialog(
-                  //           context: context,
-                  //           builder: (context) {
-                  //             Future.delayed(Duration(seconds: 2), () {
-                  //               Navigator.of(context).pop(true);
-                  //             });
-                  //             return AlertDialog(
-                  //               content: Column(
-                  //                 mainAxisSize: MainAxisSize.min,
-                  //                 children: [
-                  //                   Icon(Icons.check_circle_outline, size: 33, color: Colors.green,),
-                  //                   SizedBox(height: 5,),
-                  //                   Text('Order Successful'),
-                  //                 ]
-                  //               ),
-                  //             );
-                  //           }
-                  //         );
-                  //       },
-                  //       style: ButtonStyle(
-                  //         backgroundColor: MaterialStateProperty.all(Colors.red),
-                  //         padding: MaterialStateProperty.all(
-                  //           EdgeInsets.symmetric(
-                  //             vertical: 15,
-                  //             horizontal: 20,
-                  //           ),
-                  //         ),
-                  //         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  //           RoundedRectangleBorder(
-                  //             borderRadius: BorderRadius.circular(18.0),
-                  //           ),
-                  //         ),
-                  //       ),
-                  //         child: Text('Order Now', style: TextStyle(fontSize: 18,),),
-                  //     ),
-                  //   ),
-                  // ),
+                  SizedBox(height: 22),
+                  if(i>0)
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: widget.product.comment!.length,
+                    itemBuilder: (BuildContext context, int index){
+                      return Column(
+                        children: [
+                          Row(
+                            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.all(8),
+                                color: Colors.grey.shade200,
+                                child: Icon(Icons.person, color: Colors.red,),
+                              ),
+                              SizedBox(width: 12,),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(widget.product.comment![index].userId, style: TextStyle(fontSize: 16),),
+                                  Row(
+                                    children: [
+                                      Icon(Icons.star, color: Colors.amber.shade400, size: 16),
+                                      Icon(Icons.star, color: Colors.amber.shade400, size: 16),
+                                      Icon(Icons.star, color: Colors.amber.shade400, size: 16),
+                                      Icon(Icons.star, color: Colors.amber.shade400, size: 16),
+                                      Icon(Icons.star, color: Colors.amber.shade400, size: 16),
+                                    ],
+                                  ),
+                                  SizedBox(height: 6,),
+                                  Text(widget.product.comment![index].comment.toString(), style: TextStyle(fontSize: 16),),
+                                  
+                                  Divider(height: 5, thickness: 2, color: Colors.grey.shade300,),
+                                  SizedBox(height: 15),
+                                ],
+                              ),
+                              
+                            ],
+                          ),
+                          SizedBox(height: 15),
+                        ],
+                      );
+                    }
+                  )
                 ],
               ),
             ),
